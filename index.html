@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalabe Motors & Transportation Logistics Limited</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p+75m9h+Opxh6mGRVaF642vV35eyzFw9EkP9pDJnv97Plki6G3Cgv3vE+9sYW3cyf/3Gc8tW7VxEj2gjQQU4gA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+
+<!-- ============================================================
+     NAVIGATION BAR
+     Logo on the left, menu links in the middle, book button right
+     ============================================================ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-content">
+
+    <!-- LOGO — oval shape with company name -->
+    <div class="logo" onclick="goToSection('home')">
+      <div class="logo-oval">
+        <span class="logo-name">KALABE</span>
+        <span class="logo-tag">MOTORS &amp; TRANSPORT LOGISTICS ®</span>
+      </div>
+    </div>
+
+    <!-- NAVIGATION LINKS (hidden on mobile) -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#fleet">Our Fleet</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#payments">Payments</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- RIGHT SIDE BUTTONS -->
+    <div class="nav-buttons">
+      <!-- WhatsApp quick link -->
+      <a href="https://wa.me/260970402241" class="btn-whatsapp" target="_blank"><img src="images/whatsapp.png" alt="WhatsApp" style="height: 24px; width: auto;"> WhatsApp</a>
+      <!-- Main book now button -->
+      <button class="btn-book" onclick="openBookingModal()">Book Now</button>
+    </div>
+
+    <!-- HAMBURGER MENU BUTTON (shows only on mobile) -->
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- MOBILE MENU (slides down when hamburger is clicked) -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html"       onclick="closeMobileMenu()">Home</a>
+    <a href="fleet.html"      onclick="closeMobileMenu()">Our Fleet</a>
+    <a href="services.html"   onclick="closeMobileMenu()">Services</a>
+    <a href="why.html"        onclick="closeMobileMenu()">Why Us</a>
+    <a href="payments.html"   onclick="closeMobileMenu()">Payments</a>
+    <a href="contact.html"    onclick="closeMobileMenu()">Contact</a>
+    <button class="btn-book" onclick="openBookingModal(); closeMobileMenu()"> Book Now</button>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO SECTION
+     Big banner at the top of the page
+     ============================================================ -->
+<section id="home" class="hero-section" style="background-color: #0A2558;">
+
+  <!-- Main hero text and buttons -->
+  <div class="hero-text">
+    <p class="hero-eyebrow">....Driven by Trust, Powered by Innovation</p>
+
+    <!-- The headline cycles through different messages (typed by JS) -->
+    <h1 class="hero-headline">
+      <span id="typed-line1">Drive Your Dreams</span><br>
+      <span class="gold" id="typed-line2">With Us Today!</span>
+      <span class="cursor">|</span>
+    </h1>
+
+    <p class="hero-description">
+      Your all-in-one Motor &amp; Logistics Partner across Zambia
+    </p>
+
+    <!-- Colourful keyword chips -->
+    <div class="hero-chips">
+      <span class="chip">Rentals</span>
+      <span class="chip">Transport</span>
+      <span class="chip">Logistics</span>
+      <span class="chip">Payments</span>
+      <span class="chip">Delivery</span>
+      <span class="chip">Protection</span>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="hero-buttons">
+      <button class="btn-gold" onclick="goToSection('fleet')"><i class="fa-solid fa-car-side"></i> Explore Fleet</button>
+      <a href="tel:+260970402241" class="btn-outline-white"><i class="fa-solid fa-phone"></i> Call Now</a>
+    </div>
+  </div>
+
+  <!-- STATS BAR at the bottom of hero -->
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-number" id="stat0">0+</span>
+      <span class="stat-label">Vehicles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number" id="stat1">0yr+</span>
+      <span class="stat-label">Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number" id="stat2">24/7</span>
+      <span class="stat-label">Support</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">All ZM</span>
+      <span class="stat-label">Coverage</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FLEET SECTION
+     Shows all available vehicles as cards
+     ============================================================ -->
+<section id="fleet" class="section white-bg">
+  <div class="container">
+
+    <!-- Section heading -->
+    <div class="section-head">
+      <span class="badge green-badge">Our Fleet</span>
+      <h2>Choose Your Vehicle</h2>
+      <p>Cars · SUVs · Buses · Trucks · Pickups  all fully maintained for every road in Zambia</p>
+    </div>
+
+    <!-- Search box to filter fleet -->
+    <div class="fleet-search-wrap">
+      <input
+        type="text"
+        id="fleet-search"
+        class="fleet-search"
+        placeholder="🔍 Type to search — Toyota, SUV, Diesel..."
+        oninput="searchFleet(this.value)"
+      />
+    </div>
+
+    <!-- Filter tabs — click to show only that category -->
+    <div class="filter-tabs">
+      <button class="tab active" data-cat="all"     onclick="filterVehicles('all',this)">All</button>
+      <button class="tab"        data-cat="Economy" onclick="filterVehicles('Economy',this)">Economy</button>
+      <button class="tab"        data-cat="SUV"     onclick="filterVehicles('SUV',this)">SUV</button>
+      <button class="tab"        data-cat="Luxury"  onclick="filterVehicles('Luxury',this)">Luxury</button>
+      <button class="tab"        data-cat="Bus"     onclick="filterVehicles('Bus',this)">Bus</button>
+      <button class="tab"        data-cat="Truck"   onclick="filterVehicles('Truck',this)">Truck</button>
+      <button class="tab"        data-cat="Pickup"  onclick="filterVehicles('Pickup',this)">Pickup</button>
+    </div>
+
+    <!-- Vehicle cards grid (filled by JavaScript) -->
+    <div class="fleet-grid" id="fleet-grid">
+      <!-- Cards are inserted here by script.js -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SERVICES SECTION
+     Lists all the services Kalabe Motors offers
+     ============================================================ -->
+<section id="services" class="section grey-bg">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge blue-badge">Our Services</span>
+      <h2>Professional Transportation, Rental &amp; Logistics</h2>
+      <p class="gold-text">Tailored to meet your every need</p>
+    </div>
+
+    <!-- Service cards — each shows an icon, title and description -->
+    <div class="services-grid">
+
+      <!-- Service 1 -->
+      <div class="service-card blue-card">
+        <div class="service-icon">
+          <!-- Calendar icon SVG -->
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="8" width="32" height="28" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+            <rect x="4" y="14" width="32" height="2" fill="#1D4ED8"/>
+            <rect x="12" y="4" width="4" height="8" rx="2" fill="#1D4ED8"/>
+            <rect x="24" y="4" width="4" height="8" rx="2" fill="#1D4ED8"/>
+            <rect x="9"  y="20" width="5" height="5" rx="1" fill="#1D4ED8" opacity=".6"/>
+            <rect x="18" y="20" width="5" height="5" rx="1" fill="#1D4ED8" opacity=".6"/>
+            <rect x="27" y="20" width="5" height="5" rx="1" fill="#1D4ED8" opacity=".6"/>
+          </svg>
+        </div>
+        <h3>Short-Term Rentals</h3>
+        <p>Ideal for tourists or visitors — vehicles available from just one day across Zambia.</p>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card green-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="3" y="10" width="34" height="24" rx="5" fill="#D1FAE5" stroke="#1A7A2A" stroke-width="2"/>
+            <circle cx="20" cy="20" r="7" fill="#1A7A2A" opacity=".2" stroke="#1A7A2A" stroke-width="2"/>
+            <text x="20" y="25" text-anchor="middle" fill="#1A7A2A" font-size="10" font-weight="bold">$</text>
+            <rect x="3" y="10" width="34" height="5" rx="3" fill="#1A7A2A" opacity=".15"/>
+          </svg>
+        </div>
+        <h3>Long-Term / Monthly</h3>
+        <p>Flexible solutions for individuals or professionals needing extended rental agreements.</p>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card gold-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="16" fill="#FEF9C3" stroke="#F5B800" stroke-width="2"/>
+            <path d="M20 12 L24 20 L20 18 L16 20 Z" fill="#F5B800"/>
+            <circle cx="20" cy="28" r="3" fill="#F5B800" opacity=".5"/>
+          </svg>
+        </div>
+        <h3>Airport Transfers</h3>
+        <p>Pickup and drop-off at Kenneth Kaunda and all major Zambian airports, 24/7.</p>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card blue-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="5" y="8" width="30" height="24" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+            <rect x="12" y="16" width="16" height="2" rx="1" fill="#1D4ED8"/>
+            <rect x="12" y="21" width="10" height="2" rx="1" fill="#1D4ED8" opacity=".6"/>
+            <rect x="15" y="4"  width="10" height="6"  rx="2" fill="#1D4ED8" opacity=".4"/>
+          </svg>
+        </div>
+        <h3>Corporate Rentals</h3>
+        <p>Tailored mobility solutions for businesses and special events across Zambia.</p>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card green-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="2" y="16" width="28" height="14" rx="3" fill="#D1FAE5" stroke="#1A7A2A" stroke-width="2"/>
+            <rect x="28" y="20" width="10" height="10" rx="2" fill="#1A7A2A" opacity=".3" stroke="#1A7A2A" stroke-width="2"/>
+            <circle cx="9"  cy="32" r="4" fill="#1A7A2A"/>
+            <circle cx="25" cy="32" r="4" fill="#1A7A2A"/>
+          </svg>
+        </div>
+        <h3>Specialized Vehicles</h3>
+        <p>Trucks, cargo vans, and 4x4s for moving, camping, or transporting large items.</p>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card gold-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="15" fill="#FEF9C3" stroke="#F5B800" stroke-width="2"/>
+            <path d="M13 20 L18 25 L27 15" stroke="#F5B800" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>Insurance &amp; Protection</h3>
+        <p>Comprehensive cover options from basic to premium drive with full peace of mind.</p>
+      </div>
+
+      <!-- Service 7 -->
+      <div class="service-card blue-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="10" width="28" height="20" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+            <path d="M14 30 L10 36 L30 36 L26 30 Z" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+            <circle cx="20" cy="20" r="5" fill="#1D4ED8" opacity=".4"/>
+          </svg>
+        </div>
+        <h3>Delivery &amp; Collection</h3>
+        <p>We deliver vehicles to your home or office fast, secure, and door-to-door.</p>
+      </div>
+
+      <!-- Service 8 -->
+      <div class="service-card green-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="14" r="10" fill="#D1FAE5" stroke="#1A7A2A" stroke-width="2"/>
+            <rect x="16" y="12" width="8" height="4" rx="1" fill="#1A7A2A" opacity=".5"/>
+            <rect x="19" y="10" width="2" height="8" rx="1" fill="#1A7A2A"/>
+            <rect x="9" y="26" width="22" height="8" rx="4" fill="#D1FAE5" stroke="#1A7A2A" stroke-width="2"/>
+            <rect x="14" y="29" width="12" height="2" rx="1" fill="#1A7A2A" opacity=".5"/>
+          </svg>
+        </div>
+        <h3>Roadside Assistance</h3>
+        <p>GPS navigation, child safety seats, Wi-Fi, and 24/7 breakdown support included.</p>
+      </div>
+
+      <!-- Service 9 -->
+      <div class="service-card gold-card">
+        <div class="service-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="14" fill="#FEF9C3" stroke="#F5B800" stroke-width="2"/>
+            <circle cx="20" cy="20" r="8"  stroke="#F5B800" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="20" r="3"  fill="#F5B800"/>
+            <line x1="20" y1="6"  x2="20" y2="10" stroke="#F5B800" stroke-width="2"/>
+            <line x1="20" y1="30" x2="20" y2="34" stroke="#F5B800" stroke-width="2"/>
+            <line x1="6"  y1="20" x2="10" y2="20" stroke="#F5B800" stroke-width="2"/>
+            <line x1="30" y1="20" x2="34" y2="20" stroke="#F5B800" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>GPS Tracking</h3>
+        <p>Real-time location monitoring for every vehicle maximum safety and peace of mind.</p>
+      </div>
+
+    </div><!-- end services-grid -->
+  </div>
+</section>
+
+
+<!-- ============================================================
+     WHY CHOOSE US SECTION
+     Dark blue background with reasons to choose Kalabe
+     ============================================================ -->
+<section id="why" class="section dark-bg">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge gold-badge">Why Choose Us?</span>
+      <h2 class="light-text">The Kalabe Advantage</h2>
+    </div>
+
+    <div class="why-grid">
+
+      <!-- Reason 1 -->
+      <div class="why-card">
+        <div class="why-icon">
+          <!-- Vehicle check icon -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="rgba(245,184,0,.15)" stroke="#F5B800" stroke-width="2"/>
+            <path d="M14 24 L21 31 L34 17" stroke="#F5B800" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h4>Modern Fleet</h4>
+        <p>Every vehicle under 3 years old, serviced regularly and GPS-tracked.</p>
+      </div>
+
+      <!-- Reason 2 -->
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="rgba(245,184,0,.15)" stroke="#F5B800" stroke-width="2"/>
+            <circle cx="24" cy="20" r="7" fill="#F5B800" opacity=".3" stroke="#F5B800" stroke-width="2"/>
+            <path d="M14 38 Q24 30 34 38" stroke="#F5B800" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <h4>Vetted Drivers</h4>
+        <p>All drivers are background-checked, licensed, trained and experienced.</p>
+      </div>
+
+      <!-- Reason 3 -->
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="rgba(245,184,0,.15)" stroke="#F5B800" stroke-width="2"/>
+            <circle cx="24" cy="24" r="8"  stroke="#F5B800" stroke-width="2" fill="none"/>
+            <line x1="24" y1="8"  x2="24" y2="16" stroke="#F5B800" stroke-width="2"/>
+            <line x1="24" y1="32" x2="24" y2="40" stroke="#F5B800" stroke-width="2"/>
+            <line x1="8"  y1="24" x2="16" y2="24" stroke="#F5B800" stroke-width="2"/>
+            <line x1="32" y1="24" x2="40" y2="24" stroke="#F5B800" stroke-width="2"/>
+          </svg>
+        </div>
+        <h4>24/7 Support</h4>
+        <p>Always available day or night, wherever you are in Zambia.</p>
+      </div>
+
+      <!-- Reason 4 -->
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="rgba(245,184,0,.15)" stroke="#F5B800" stroke-width="2"/>
+            <path d="M24 10 L28 20 L38 20 L30 27 L33 38 L24 32 L15 38 L18 27 L10 20 L20 20 Z" fill="#F5B800" opacity=".7"/>
+          </svg>
+        </div>
+        <h4>Competitive Prices</h4>
+        <p>Best value for money transparent pricing with zero hidden fees.</p>
+      </div>
+
+      <!-- Reason 5 -->
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="rgba(245,184,0,.15)" stroke="#F5B800" stroke-width="2"/>
+            <circle cx="24" cy="20" r="6"  fill="#F5B800" opacity=".4"/>
+            <path d="M24 26 Q24 36 16 40 Q24 44 32 40 Q24 36 24 26" fill="#F5B800" opacity=".6"/>
+          </svg>
+        </div>
+        <h4>Nationwide</h4>
+        <p>From Lusaka to Livingstone we cover every province in Zambia.</p>
+      </div>
+
+      <!-- Reason 6 -->
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="rgba(245,184,0,.15)" stroke="#F5B800" stroke-width="2"/>
+            <rect x="14" y="18" width="20" height="14" rx="3" fill="#F5B800" opacity=".3" stroke="#F5B800" stroke-width="2"/>
+            <rect x="19" y="14" width="10" height="6"  rx="2" fill="#F5B800" opacity=".5" stroke="#F5B800" stroke-width="2"/>
+            <circle cx="24" cy="25" r="3" fill="#F5B800"/>
+          </svg>
+        </div>
+        <h4>Fully Insured</h4>
+        <p>All vehicles carry comprehensive cover drive with total confidence.</p>
+      </div>
+
+    </div><!-- end why-grid -->
+  </div>
+</section>
+
+
+
+
+<!-- ============================================================
+     PAYMENTS SECTION
+     Shows accepted payment methods
+     ============================================================ -->
+<section id="payments" class="section grey-bg">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge green-badge">Payments</span>
+      <h2>Pay Easily &amp; Instantly</h2>
+      <p>Multiple secure payment methods available</p>
+    </div>
+
+    <div class="payments-grid">
+
+      <!-- Mobile Money card -->
+      <div class="payment-card">
+        <h4 class="payment-title">📱 Mobile Money</h4>
+        <!-- Payment logos as coloured badges -->
+        <div class="payment-badges">
+          <div class="p-badge momo">
+            <img src="images/MTN-MOBLE MONEY.png" alt="MTN MoMo" width="50" height="50" style="object-fit: contain;" />
+          </div>
+          <div class="p-badge airtel">
+            <img src="images/Airtel-Money.png" alt="Airtel Money" width="50" height="50" style="object-fit: contain;" />
+          </div>
+          <div class="p-badge airtel">
+            <img src="images/ZAMTEL-MOB1.png" alt="Airtel Money" width="50" height="50" style="object-fit: contain;" />
+          </div>
+        </div>
+      </div>
+
+      <!-- BANK card -->
+      <div class="payment-card featured-payment">
+        <h4 class="payment-title">BANK Payment</h4>
+        <div class="payment-badges">
+          <div class="p-badge binance">
+            <div class="p-badge indo">
+            <img src="images/IZB.jfif" alt="Indo Mobile" width="50" height="50" style="object-fit: contain;" />
+            </div>  
+          </div>
+
+         <div class="p-badge binance">
+            <div class="p-badge indo">
+            <img src="images/Zanaco-600x400-1.jpg" alt="Indo Mobile" width="50" height="50" style="object-fit: contain;" />
+          </div>  
+          </div>
+        </div>
+        <div class="secure-badges">
+          <span>✓ Instant</span>
+          <span>✓ Safe</span>
+          <span>✓ Verified</span>
+        </div>
+      </div>
+
+      <!-- Cash/Card card -->
+      <div class="payment-card">
+        <h4 class="payment-title">💳 Traditional</h4>
+        <div class="payment-badges">
+          <div class="p-badge cash-b">
+
+             <div class="p-badge indo">
+            <img src="images/CASH-ICON.png" alt="Indo Mobile" width="50" height="50" style="object-fit: contain;" />
+          </div>
+
+          </div>
+          <div class="p-badge card-b">
+             <div class="p-badge indo">
+            <img src="images/CHECK-MONEY.webp" alt="Indo Mobile" width="50" height="50" style="object-fit: contain;" />
+          </div>
+          </div>
+          <div class="p-badge bank-b">
+              <div class="p-badge indo">
+            <img src="images/MOBLE-TRANSFER.jpg" alt="Indo Mobile" width="50" height="50" style="object-fit: contain;" /> 
+
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end payments-grid -->
+
+    <!-- Note about payments -->
+    <div class="payment-note">
+      <p>Make payments directly to <strong>Kalabe Motor &amp; Transportation Logistics Limited</strong></p>
+      <div class="payment-tags">
+        <span>Easy</span>
+        <span>Safe</span>
+        <span>Instant</span>
+        <span>Traceable</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT SECTION
+     Contact info + message form
+     ============================================================ -->
+<section id="contact" class="section white-bg">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- LEFT: Contact information -->
+      <div class="contact-info">
+        <span class="badge green-badge">Contact Us</span>
+        <h2>Get In Touch</h2>
+        <p class="contact-intro">
+          For reservations, corporate accounts, airport transfers or any enquiry 
+          our team responds within minutes.
+        </p>
+
+        <!-- Contact details list -->
+        <div class="contact-list">
+          <div class="contact-item">
+            <!-- Phone icon SVG -->
+            <div class="contact-icon">
+              <div class="p-badge indo">
+            <img src="images/PHONE.jpg" alt="Indo Mobile" width="25" height="25" style="object-fit: contain;" />
+          </div>
+            </div>
+            <div>
+              <strong>Phone / WhatsApp</strong>
+              <a href="tel:+260970402241">+260 970 402 241</a>
+            </div>
+          </div>
+          <div class="contact-item">
+             <div class="p-badge indo">
+            <img src="images/EMAIL.png" alt="Indo Mobile" width="25" height="25" style="object-fit: contain;" />
+          </div>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:info@kalabelogistics.com">info@kalabelogistics.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+           <div class="p-badge indo">
+            <img src="images/WEBSITE.png" alt="Indo Mobile" width="25" height="25" style="object-fit: contain;" />
+          </div>
+            <div>
+              <strong>Website</strong>
+              <a href="http://www.kalabelogistics.com" target="_blank">www.kalabelogistics.com</a>
+            </div><br>
+          </div>
+          <div class="contact-item">
+             <div class="p-badge indo">
+            <img src="images/HQ.png" alt="Indo Mobile" width="25" height="25" style="object-fit: contain;" />
+          </div>
+            <div>
+              <strong>Head Office</strong>
+              <span>Lusaka, Zambia</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="p-badge indo">
+            <img src="images/clock-137.png" alt="Indo Mobile" width="25" height="25" style="object-fit: contain;" />
+          </div>
+            <div>
+              <strong>Hours</strong>
+              <span>Mon–Sun, 6:00 AM – 10:00 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CEO profile card -->
+        <div class="ceo-card">
+          <!-- CEO photo as SVG avatar -->
+          <div class="ceo-avatar">
+            <svg width="56" height="56" viewBox="0 0 56 56">
+              <circle cx="28" cy="28" r="28" fill="#F5B800"/>
+              <circle cx="28" cy="22" r="10" fill="#0A2558" opacity=".8"/>
+              <path d="M10 50 Q28 38 46 50" fill="#0A2558" opacity=".8"/>
+              <text x="28" y="26" text-anchor="middle" fill="#F5B800" font-size="10" font-weight="bold" font-family="Oswald">JK</text>
+            </svg>
+          </div>
+          <div class="ceo-info">
+            <span class="ceo-name">Joseph Kalala</span>
+            <span class="ceo-title">Chief Executive Officer</span>
+            <span class="ceo-phone">+260 970 402 241</span>
+          </div>
+        </div>
+
+        <!-- World clocks -->
+        <div class="world-clocks">
+          <div class="clock-row"><span>🇿🇲 Lusaka</span><span class="clock-val" id="clock-lusaka">--:--:--</span></div>
+          <div class="clock-row"><span>🇬🇧 London</span><span class="clock-val" id="clock-london">--:--:--</span></div>
+          <div class="clock-row"><span>🇦🇪 Dubai</span> <span class="clock-val" id="clock-dubai">--:--:--</span></div>
+        </div>
+      </div><!-- end contact-info -->
+
+      <!-- RIGHT: Message form -->
+      <div class="contact-form-wrap">
+        <div class="form-box">
+          <h3>Send a Message</h3>
+          <form id="contact-form" action="contact.php" method="POST">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="c-name">Full Name </label>
+                <input type="text" id="c-name" name="name" placeholder="Your full name" required />
+              </div>
+              <div class="form-field">
+                <label for="c-email">Email </label>
+                <input type="email" id="c-email" name="email" placeholder="your@email.com" required />
+              </div>
+            </div>
+
+          <div class="form-field">
+            <label for="c-phone">Phone</label>
+            <input type="tel" id="c-phone" name="phone" placeholder="+260 97 000 0000" />
+          </div>
+
+          <div class="form-field">
+            <label for="c-subject">Subject</label>
+            <select id="c-subject" name="subject">
+              <option>Vehicle Reservation</option>
+              <option>Corporate Account</option>
+              <option>Airport Transfer</option>
+              <option>General Enquiry</option>
+              <option>Complaint / Feedback</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="c-message">Message </label>
+            <textarea id="c-message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary full-width">Send Message ✉️</button>
+          </form>
+        </div>
+      </div><!-- end contact-form-wrap -->
+
+    </div><!-- end contact-layout -->
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     Links, info, copyright
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <div class="logo-oval small">
+          <span class="logo-name">KALABE</span>
+          <span class="logo-tag">MOTORS &amp; TRANSPORT<br>LOGISTICS LIMITED</span>
+        </div>
+        <p>Driven by Trust. Powered by Innovation.</p>
+        <p class="italic-gold">A Company That Defines Generations.</p>
+        <a href="https://wa.me/260970402241" class="whatsapp-link" target="_blank"><img src="images/whatsapp.png" alt="WhatsApp" style="height: 20px; width: auto;"> Chat on WhatsApp</a>
+      </div>
+
+      <!-- Services links -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Short-Term Rentals</a>
+        <a href="#services">Long-Term Rental</a>
+        <a href="#services">Airport Transfers</a>
+        <a href="#services">Corporate Rentals</a>
+        <a href="#services">Roadside Assistance</a>
+      </div>
+
+      <!-- Fleet links -->
+      <div class="footer-col">
+        <h4>Our Fleet</h4>
+        <a href="#fleet">Economy Cars</a>
+        <a href="#fleet">SUVs &amp; 4x4s</a>
+        <a href="#fleet">Luxury Vehicles</a>
+        <a href="#fleet">Buses</a>
+        <a href="#fleet">Trucks &amp; Cargo</a>
+      </div>
+
+      <!-- Contact info -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+260970402241">+260 970 402 241</a>
+        <a href="mailto:info@kalabelogistics.com">info@kalabelogistics.com</a>
+        <span>Lusaka, Zambia</span>
+        <span>Mon–Sun: 6 AM – 10 PM</span>
+      </div>
+    </div>
+
+    <!-- Bottom copyright bar -->
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Kalabe Motors &amp; Transportation Logistics Limited. All Rights Reserved.</p>
+      <div class="footer-badges">
+        <span>📍 GPS Tracking</span>
+        <span>🔧 Diagnostics</span>
+        <span>🚚 Logistics</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     BOOKING MODAL
+     Pops up when user clicks "Book Now"
+     ============================================================ -->
+<div id="booking-modal" class="modal-backdrop">
+  <div class="modal-box">
+    <!-- Close button -->
+    <button class="modal-close" onclick="closeBookingModal()">✕</button>
+
+    <h2>Book a Vehicle</h2>
+    <p id="booking-subtitle" class="modal-sub">Complete your reservation below</p>
+
+    <!-- Booking form fields -->
+    <form id="booking-form" action="book_vehicle.php" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+      <div class="form-field">
+        <label>First Name</label>
+        <input type="text" id="b-first-name" name="first_name" placeholder="First name" required />
+      </div>
+      <div class="form-field">
+        <label>Last Name</label>
+        <input type="text" id="b-last-name" name="last_name" placeholder="Last name" required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" id="b-email" name="email" placeholder="your@email.com" required />
+      </div>
+      <div class="form-field">
+        <label>Phone</label>
+        <input type="tel" id="b-phone" name="phone" placeholder="+260 97 000 0000" required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label>NRC Number</label>
+        <input type="text" id="b-nrc" name="nrc_number" placeholder="e.g. 123456/01/1" />
+      </div>
+      <div class="form-field">
+        <label>NRC Document Image</label>
+        <input type="file" id="b-nrc-file" name="nrc_document" accept="image/*" />
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label>Vehicle</label>
+      <!-- Options filled by JavaScript -->
+      <select id="b-vehicle" name="vehicle_id" onchange="onVehicleSelect()" required></select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label>Pick-Up Date</label>
+        <input type="date" id="b-pickup" name="start_date" onchange="recalcBooking()" required />
+      </div>
+      <div class="form-field">
+        <label>Return Date</label>
+        <input type="date" id="b-return" name="end_date" onchange="recalcBooking()" required />
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label>Purpose</label>
+      <input type="text" id="b-purpose" name="purpose" placeholder="e.g. Business travel, Safari, Airport transfer..." />
+    </div>
+
+    <!-- Live price summary box -->
+    <div class="price-summary">
+      <div class="price-row"><span>Daily Rate</span><span id="p-rate">—</span></div>
+      <div class="price-row"><span>Duration</span><span id="p-days">—</span></div>
+      <div class="price-row total-row"><span>Estimated Total</span><span id="p-total">—</span></div>
+    </div>
+
+    <button type="submit" class="btn-primary full-width">Confirm Reservation 🚗</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SUCCESS MODAL
+     Shows after a booking is confirmed
+     ============================================================ -->
+<div id="success-modal" class="modal-backdrop">
+  <div class="modal-box success-modal-box">
+    <!-- Big green tick -->
+    <div class="success-tick">✓</div>
+    <h2>Booking Confirmed!</h2>
+    <!-- Booking details filled by JavaScript -->
+    <div id="booking-details" class="booking-details"></div>
+    <div class="success-buttons">
+      <a id="whatsapp-confirm-link" href="https://wa.me/260970402241" class="btn-whatsapp-big" target="_blank">
+        <img src="images/whatsapp.png" alt="WhatsApp" style="height: 24px; width: auto;"> Confirm via WhatsApp
+      </a>
+      <button class="btn-primary" onclick="closeSuccessModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     FLOATING ACTION BUTTONS
+     Fixed buttons that stay on screen as user scrolls
+     ============================================================ -->
+
+<!-- Book Now button (appears after scrolling down) -->
+<button id="fab-book" class="fab fab-book" onclick="openBookingModal()">📋 Book Now</button>
+
+<!-- WhatsApp button (always visible, pulses gently) -->
+<a id="fab-wa" href="https://wa.me/260970402241" class="fab fab-wa" target="_blank"><img src="images/whatsapp.png" alt="WhatsApp" style="height: 28px; width: auto;"></a>
+
+<!-- Back to top button -->
+<button id="fab-top" class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+
+<!-- ============================================================
+     TOAST NOTIFICATION
+     Small message that pops up briefly at the bottom
+     ============================================================ -->
+<div id="toast" class="toast"></div>
+
+
+<!-- Load the JavaScript file last so the HTML is ready first -->
+<script src="script.js"></script>
+<script src="home.js"></script>
+</body>
+</html>
